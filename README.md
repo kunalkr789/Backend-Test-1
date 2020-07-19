@@ -1,6 +1,6 @@
 # Backend-Test-1
 ## CSV Upload
-Using this project upload any CSV File And display contents in tabular format and also filter content with the help of search box.
+Use this project to upload any CSV File And display contents in tabular format and also filter content with the help of search box.
 
 ## Setting up the project
 * Clone or Download the Repo using https://github.com/kunalkr789/Backend-Test-1
