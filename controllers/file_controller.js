@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const csv = require("csv-parser");
 
+//for uploading file
 module.exports.uploadCSV = function (req, res) {
   try {
     File.uploadedCSVFile(req, res, function (err) {
@@ -33,6 +34,7 @@ module.exports.getFile = async function (req, res) {
   });
 };
 
+//for opening a file
 module.exports.openFile = async function (req, res) {
   const results = [];
   const file = await File.findById(req.params.id);

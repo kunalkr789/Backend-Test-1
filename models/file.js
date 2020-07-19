@@ -3,6 +3,7 @@ const multer = require("multer");
 const path = require("path");
 const FILE_PATH = path.join("/uploads");
 
+//schema for file
 const fileSchema = new mongoose.Schema(
   {
     filename: {
@@ -17,6 +18,7 @@ const fileSchema = new mongoose.Schema(
   }
 );
 
+//settings for uploading file using multer
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "..", FILE_PATH));
@@ -26,10 +28,12 @@ let storage = multer.diskStorage({
   },
 });
 
+//static functions
 fileSchema.statics.uploadedCSVFile = multer({
   storage: storage,
 }).single("filename");
 fileSchema.statics.filePath = FILE_PATH;
 
+//making and exporting model
 const File = mongoose.model("File", fileSchema);
 module.exports = File;
