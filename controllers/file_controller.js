@@ -1,7 +1,7 @@
-const File = require("../models/csv_file");
+const File = require("../models/file");
 const path = require("path");
 const fs = require("fs");
-const csvParser = require("csv-parser");
+const csv = require("csv-parser");
 
 module.exports.uploadCSV = function (req, res) {
   try {
@@ -14,8 +14,10 @@ module.exports.uploadCSV = function (req, res) {
 
       if (req.file) {
         File.create({
-          filename: File.path + "/" + req.file.filename,
+          filename: File.filePath + "/" + req.file.filename,
+          originalName: req.file.originalname,
         });
+        return res.redirect("/");
       }
     });
   } catch (error) {
@@ -31,8 +33,8 @@ module.exports.getFile = async function (req, res) {
   });
 };
 
-const results = [];
 module.exports.openFile = async function (req, res) {
+  const results = [];
   const file = await File.findById(req.params.id);
   fs.createReadStream(path.join(__dirname, "..", file.filename))
     .pipe(csv())

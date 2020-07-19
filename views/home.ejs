@@ -3,9 +3,14 @@
     <title></title>
   </head>
   <body>
-    <form action="/file/upload" enctype="multipart/form-data" method="POST">
+    <form action="/upload" enctype="multipart/form-data" method="POST">
       <input type="file" name="filename" placeholder="filename" accept=".csv" />
       <input type="submit" value="upload" />
     </form>
+    <% for(file of files){%>
+    <p>
+      <a href="/file/<%=file._id%>"><%= file.originalName %></a>
+    </p>
+    <% } %>
   </body>
 </html>

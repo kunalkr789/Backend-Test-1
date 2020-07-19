@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title><%=title%></title>
+
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <input
+      type="text"
+      id="inputdata"
+      onkeyup="searchFunction()"
+      placeholder="Search here.."
+    />
+    <table id="Table">
+      <thead>
+        <tr>
+          <%let k=0%> <% for(i in rows){%> <% for(j in rows[0]){%>
+          <th><%=j%></th>
+          <%k+=1%> <% } %> <%break%> <% } %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(i in rows){%> <%let key=i%> <%let val=rows[i]%>
+        <tr>
+          <% for(j in val){%> <%let sub_key = j%> <%let sub_val = val[j]%>
+          <td><%=sub_val%></td>
+
+          <% } %>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </body>
+  <script>
+    function searchFunction() {
+      let input, filter, table, tr, td, i, text;
+      input = document.getElementById("inputdata");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("Table");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          text = td.textContent || td.innerText;
+          if (text.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+</html>
